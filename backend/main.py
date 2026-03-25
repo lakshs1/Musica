@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from core.config import get_settings
-from routers import auth, playback, playlists, search, tracks
+from routers import search
 
 settings = get_settings()
 
@@ -16,11 +16,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(auth.router, prefix=settings.api_prefix)
 app.include_router(search.router, prefix=settings.api_prefix)
-app.include_router(tracks.router, prefix=settings.api_prefix)
-app.include_router(playlists.router, prefix=settings.api_prefix)
-app.include_router(playback.router, prefix=settings.api_prefix)
 
 
 @app.get("/health")

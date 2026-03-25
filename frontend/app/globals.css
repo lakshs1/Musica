@@ -5,13 +5,13 @@
 :root {
   color-scheme: dark;
   --bg-primary: #000000;
-  --bg-elevated: #05080f;
-  --bg-soft-blue: #eaf3ff;
-  --text-primary: #e8eef8;
-  --text-muted: #a8bbd6;
-  --border-tone: rgba(139, 183, 255, 0.3);
-  --card-tone: rgba(8, 16, 30, 0.9);
-  --accent-blue: #7fb8ff;
+  --bg-elevated: #030303;
+  --bg-panel: #070707;
+  --text-primary: #f5f7fb;
+  --text-muted: #a0a7b4;
+  --border-tone: rgba(255, 255, 255, 0.08);
+  --card-tone: rgba(7, 7, 7, 0.96);
+  --accent-blue: #8ec5ff;
 }
 
 * {
@@ -25,21 +25,22 @@ body {
 
 body {
   margin: 0;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: Georgia, 'Times New Roman', serif;
   background:
-    radial-gradient(circle at top right, rgba(92, 156, 255, 0.2), transparent 38%),
-    radial-gradient(circle at 10% 5%, rgba(180, 218, 255, 0.1), transparent 30%),
-    linear-gradient(160deg, var(--bg-primary) 0%, var(--bg-elevated) 72%);
+    radial-gradient(circle at top right, rgba(142, 197, 255, 0.12), transparent 28%),
+    radial-gradient(circle at 12% 8%, rgba(255, 255, 255, 0.05), transparent 22%),
+    linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-elevated) 100%);
   color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
 }
 
 @layer components {
   .minimal-card {
-    @apply rounded-2xl border p-5 shadow-lg;
+    @apply rounded-[1.75rem] border p-5 shadow-2xl;
     border-color: var(--border-tone);
     background: var(--card-tone);
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 28px 80px rgba(0, 0, 0, 0.42);
   }
 
   .minimal-muted {
@@ -47,24 +48,24 @@ body {
   }
 
   .minimal-button {
-    @apply inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm transition;
+    @apply inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm transition;
     border: 1px solid var(--border-tone);
-    background: rgba(127, 184, 255, 0.15);
-    color: #dcecff;
+    background: linear-gradient(135deg, rgba(142, 197, 255, 0.26), rgba(255, 255, 255, 0.08));
+    color: #f4f8ff;
   }
 
   .minimal-button:hover {
-    background: rgba(127, 184, 255, 0.25);
+    background: linear-gradient(135deg, rgba(142, 197, 255, 0.36), rgba(255, 255, 255, 0.12));
   }
 
   .minimal-button-secondary {
-    @apply inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm transition;
-    border: 1px solid rgba(127, 184, 255, 0.2);
-    background: rgba(0, 0, 0, 0.5);
-    color: #dcecff;
+    @apply inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm transition;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.03);
+    color: #eceff5;
   }
 
   .minimal-button-secondary:hover {
-    background: rgba(16, 31, 52, 0.9);
+    background: rgba(255, 255, 255, 0.06);
   }
 }

@@ -12,3 +12,8 @@ class SearchResponse(BaseModel):
     query: str
     items: list[SearchItem]
     source: str
+
+
+class RecommendationsResponse(BaseModel):
+    items: list[SearchItem]
+    source: str

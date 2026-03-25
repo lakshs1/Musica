@@ -7,6 +7,11 @@ interface SearchResponse {
   source: string;
 }
 
+interface RecommendationsResponse {
+  items: SearchResult[];
+  source: string;
+}
+
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   const response = await fetch(`${env.apiBaseUrl}${path}`, {
     ...init,
@@ -31,6 +36,7 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
 
 export const api = {
   search: (q: string) => request<SearchResponse>(`/search?q=${encodeURIComponent(q)}`),
+  recommendations: () => request<RecommendationsResponse>('/recommendations'),
   getTrack: (id: number) => request<Track>(`/tracks/${id}`),
   createPlaylist: (name: string, description?: string, token?: string) =>
     request<Playlist>('/playlists', {

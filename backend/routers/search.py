@@ -1,9 +1,5 @@
-from fastapi import APIRouter, Depends, Query, Request
-from sqlalchemy.ext.asyncio import AsyncSession
-
-from core.db import get_db
-from core.rate_limit import enforce_rate_limit
-from schemas.search import SearchResponse
+from fastapi import APIRouter, Query, Request
+from schemas.search import RecommendationsResponse, SearchResponse
 from services.search_service import SearchService
 
 router = APIRouter(tags=["search"])
@@ -14,8 +10,12 @@ service = SearchService()
 async def search_tracks(
     request: Request,
     q: str = Query(..., min_length=2, max_length=120),
-    db: AsyncSession = Depends(get_db),
 ) -> SearchResponse:
-    await enforce_rate_limit(request)
-    payload, source = await service.search(db, q)
+    payload, source = await service.search(q)
     return SearchResponse(query=payload["query"], items=payload["items"], source=source)
+
+
+@router.get("/recommendations", response_model=RecommendationsResponse)
+async def get_recommendations(request: Request) -> RecommendationsResponse:
+    payload, source = await service.recommendations()
+    return RecommendationsResponse(items=payload["items"], source=source)

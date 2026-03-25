@@ -13,10 +13,7 @@ export default function SearchPage() {
   const setQuery = useSearchStore((state) => state.setQuery);
 
   useEffect(() => {
-    const initial = params.get('q');
-    if (initial) {
-      setQuery(initial);
-    }
+    setQuery(params.get('q') ?? '');
   }, [params, setQuery]);
 
   return (

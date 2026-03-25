@@ -1,17 +1,15 @@
-export interface Track {
-  id: number;
+export interface PlayableTrack {
   youtube_id: string;
   title: string;
   thumbnail: string;
   duration: string;
 }
 
-export interface SearchResult {
-  youtube_id: string;
-  title: string;
-  thumbnail: string;
-  duration: string;
+export interface Track extends PlayableTrack {
+  id: number;
 }
+
+export interface SearchResult extends PlayableTrack {}
 
 export interface PlaylistMember {
   id: number;

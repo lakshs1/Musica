@@ -20,6 +20,7 @@ class Settings(BaseSettings):
 
     youtube_api_key: str = Field(..., alias="YOUTUBE_API_KEY")
     youtube_base_url: str = "https://www.googleapis.com/youtube/v3"
+    youtube_region_code: str = "IN"
 
     jwt_secret_key: str = Field(..., alias="JWT_SECRET_KEY")
     jwt_algorithm: str = "HS256"

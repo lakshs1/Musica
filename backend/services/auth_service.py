@@ -4,8 +4,9 @@ from core.security import get_supabase_client
 
 
 class AuthService:
-    def __init__(self) -> None:
-        self.public_client = get_supabase_client(use_service_role=False)
+    @property
+    def public_client(self):
+        return get_supabase_client(use_service_role=False)
 
     def signup(self, email: str, password: str) -> dict[str, str | None]:
         response = self.public_client.auth.sign_up({"email": email, "password": password})
