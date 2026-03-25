@@ -1,7 +1,0 @@
-{
-  "/manifest.webmanifest/route": "/manifest.webmanifest",
-  "/_not-found/page": "/_not-found",
-  "/search/page": "/search",
-  "/playlists/[id]/page": "/playlists/[id]",
-  "/page": "/"
-}
