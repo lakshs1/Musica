@@ -25,34 +25,28 @@ export function PlaylistEditor({ playlistId }: { playlistId: number }) {
   }, [playlist, setQueue]);
 
   if (!token) {
-    return <p className="text-sm text-white/60">Login required to view playlist collaboration.</p>;
+    return <p className="text-sm text-[#a8bbd6]">Login required to view playlist collaboration.</p>;
   }
 
   if (!playlist) {
-    return <p className="text-sm text-white/60">Loading playlist...</p>;
+    return <p className="text-sm text-[#a8bbd6]">Loading playlist...</p>;
   }
 
   return (
-    <div className="space-y-4">
-      <header>
-        <h1 className="text-2xl font-semibold text-white">{playlist.name}</h1>
-        <p className="text-sm text-white/60">{playlist.description ?? 'Collaborative queue'}</p>
+    <div className="space-y-5">
+      <header className="space-y-1">
+        <h1 className="text-3xl text-[#e7f2ff]">{playlist.name}</h1>
+        <p className="text-sm text-[#9ab3d1]">{playlist.description ?? 'Collaborative queue'}</p>
       </header>
 
       <ul className="space-y-2">
         {playlist.tracks.map((item) => (
-          <li key={item.id} className="flex items-center justify-between rounded-2xl bg-white/5 px-4 py-3">
-            <button
-              onClick={() => void playTrack(playlist.id, item.track, token)}
-              className="text-left"
-            >
-              <p className="text-sm font-medium text-white">{item.track.title}</p>
-              <p className="text-xs text-white/50">{item.track.duration}</p>
+          <li key={item.id} className="flex flex-col gap-3 rounded-xl border border-[#8bb7ff33] bg-[#0a1425] px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
+            <button onClick={() => void playTrack(playlist.id, item.track, token)} className="text-left">
+              <p className="text-sm text-[#e7f2ff]">{item.track.title}</p>
+              <p className="text-xs text-[#8fa7c3]">{item.track.duration}</p>
             </button>
-            <button
-              onClick={() => void removeTrack(playlist.id, item.track.id, token)}
-              className="rounded-xl border border-white/20 px-3 py-1 text-xs text-white/70"
-            >
+            <button onClick={() => void removeTrack(playlist.id, item.track.id, token)} className="minimal-button-secondary self-start sm:self-auto">
               Remove
             </button>
           </li>

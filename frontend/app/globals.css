@@ -4,8 +4,67 @@
 
 :root {
   color-scheme: dark;
+  --bg-primary: #000000;
+  --bg-elevated: #05080f;
+  --bg-soft-blue: #eaf3ff;
+  --text-primary: #e8eef8;
+  --text-muted: #a8bbd6;
+  --border-tone: rgba(139, 183, 255, 0.3);
+  --card-tone: rgba(8, 16, 30, 0.9);
+  --accent-blue: #7fb8ff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
 }
 
 body {
-  @apply bg-apple-gradient text-white antialiased;
+  margin: 0;
+  font-family: 'Times New Roman', Times, serif;
+  background:
+    radial-gradient(circle at top right, rgba(92, 156, 255, 0.2), transparent 38%),
+    radial-gradient(circle at 10% 5%, rgba(180, 218, 255, 0.1), transparent 30%),
+    linear-gradient(160deg, var(--bg-primary) 0%, var(--bg-elevated) 72%);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+}
+
+@layer components {
+  .minimal-card {
+    @apply rounded-2xl border p-5 shadow-lg;
+    border-color: var(--border-tone);
+    background: var(--card-tone);
+    backdrop-filter: blur(8px);
+  }
+
+  .minimal-muted {
+    color: var(--text-muted);
+  }
+
+  .minimal-button {
+    @apply inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm transition;
+    border: 1px solid var(--border-tone);
+    background: rgba(127, 184, 255, 0.15);
+    color: #dcecff;
+  }
+
+  .minimal-button:hover {
+    background: rgba(127, 184, 255, 0.25);
+  }
+
+  .minimal-button-secondary {
+    @apply inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm transition;
+    border: 1px solid rgba(127, 184, 255, 0.2);
+    background: rgba(0, 0, 0, 0.5);
+    color: #dcecff;
+  }
+
+  .minimal-button-secondary:hover {
+    background: rgba(16, 31, 52, 0.9);
+  }
 }

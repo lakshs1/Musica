@@ -10,18 +10,22 @@ const trending = [
 
 export default function HomePage() {
   return (
-    <main className="space-y-6">
-      <section>
-        <h1 className="mb-2 text-4xl font-semibold tracking-tight">Listen together.</h1>
-        <p className="max-w-2xl text-white/70">
-          Build collaborative playlists, search YouTube instantly, and stream with synchronized control.
+    <main className="space-y-6 sm:space-y-8">
+      <section className="space-y-3">
+        <h1 className="text-4xl leading-tight tracking-tight text-[#e7f2ff] sm:text-5xl">Minimal music. Built for focus.</h1>
+        <p className="max-w-2xl text-base minimal-muted sm:text-lg">
+          Musica is now a clean web player for collaborative listening with a black-and-blue interface designed for clarity.
         </p>
+        <div className="flex flex-wrap gap-2 pt-1">
+          <Link href="/playlists/1" className="minimal-button">Open web player</Link>
+          <Link href="/search" className="minimal-button-secondary">Find tracks</Link>
+        </div>
       </section>
 
       <section className="grid gap-4 md:grid-cols-2">
         <Card>
-          <h2 className="mb-3 text-lg font-medium">Recent</h2>
-          <ul className="space-y-2 text-sm text-white/80">
+          <h2 className="mb-3 text-2xl text-[#dcecff]">Recent spaces</h2>
+          <ul className="space-y-2 text-sm minimal-muted">
             <li>Lo-fi coding session</li>
             <li>Focus synth ambient</li>
             <li>Late-night jazz queue</li>
@@ -29,23 +33,17 @@ export default function HomePage() {
         </Card>
 
         <Card>
-          <h2 className="mb-3 text-lg font-medium">Trending</h2>
+          <h2 className="mb-3 text-2xl text-[#dcecff]">Trending now</h2>
           <ul className="space-y-2">
             {trending.map((entry) => (
               <li key={entry.id}>
-                <Link href={`/search?q=${entry.title}`} className="text-sm text-white/80 hover:text-white">
+                <Link href={`/search?q=${entry.title}`} className="text-sm text-[#bfdcff] transition hover:text-[#e7f2ff]">
                   {entry.title}
                 </Link>
               </li>
             ))}
           </ul>
         </Card>
-      </section>
-
-      <section>
-        <Link href="/playlists/1" className="inline-flex rounded-2xl bg-white px-5 py-2 text-sm font-medium text-black">
-          Open collaborative playlist
-        </Link>
       </section>
     </main>
   );
