@@ -21,7 +21,7 @@ export function YouTubeHiddenPlayer() {
 
   const currentTrack = usePlayerStore((state) => state.currentTrack);
   const isPlaying = usePlayerStore((state) => state.isPlaying);
-  const timestamp = usePlayerStore((state) => state.timestamp);
+  
   const pendingSeek = usePlayerStore((state) => state.pendingSeek);
   const clearPendingSeek = usePlayerStore((state) => state.clearPendingSeek);
   const setTimestamp = usePlayerStore((state) => state.setTimestamp);
