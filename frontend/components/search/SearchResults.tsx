@@ -20,21 +20,21 @@ export function SearchResults({ onPick }: { onPick?: (youtubeId: string) => void
 
   return (
     <div className="space-y-3">
-      <p className="text-xs uppercase tracking-wide text-white/50">Source: {source}</p>
+      <p className="text-xs uppercase tracking-wide text-[#9ab3d1]">Source: {source}</p>
       {results.map((track) => (
         <button
           key={track.youtube_id}
-          className="flex w-full items-center gap-3 rounded-2xl border border-white/10 bg-white/5 p-3 text-left transition hover:bg-white/10"
+          className="flex w-full items-center gap-3 rounded-xl border border-[#8bb7ff33] bg-[#0a1425] p-3 text-left transition hover:bg-[#10203a]"
           onClick={() => onPick?.(track.youtube_id)}
         >
-          <Image src={track.thumbnail} alt={track.title} width={56} height={56} className="rounded-xl" />
-          <div className="flex-1">
-            <p className="line-clamp-1 text-sm font-medium text-white">{track.title}</p>
-            <p className="text-xs text-white/50">{track.duration}</p>
+          <Image src={track.thumbnail} alt={track.title} width={56} height={56} className="rounded-lg" />
+          <div className="min-w-0 flex-1">
+            <p className="line-clamp-1 text-sm text-[#e5f1ff]">{track.title}</p>
+            <p className="text-xs text-[#8fa7c3]">{track.duration}</p>
           </div>
         </button>
       ))}
-      {!results.length && <p className="py-6 text-center text-sm text-white/60">No tracks yet.</p>}
+      {!results.length && <p className="py-6 text-center text-sm text-[#a8bbd6]">No tracks yet.</p>}
     </div>
   );
 }

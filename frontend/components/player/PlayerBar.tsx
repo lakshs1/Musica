@@ -14,21 +14,18 @@ export function PlayerBar() {
   const seek = usePlayerStore((state) => state.seek);
   const pause = usePlayerStore((state) => state.pause);
 
-  const queuePreview = useMemo(() => queue.slice(0, 4), [queue]);
+  const queuePreview = useMemo(() => queue.slice(0, 3), [queue]);
 
   return (
-    <footer className="fixed bottom-0 left-0 right-0 border-t border-white/10 bg-ink/80 px-4 py-3 backdrop-blur-xl">
-      <div className="mx-auto flex max-w-6xl items-center gap-4">
+    <footer className="fixed bottom-0 left-0 right-0 border-t border-[#8bb7ff4d] bg-[#02060dcc] px-3 py-3 backdrop-blur-xl sm:px-4">
+      <div className="mx-auto flex w-full max-w-6xl flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
         <div className="min-w-0 flex-1">
-          <p className="truncate text-sm font-medium text-white">{currentTrack?.title ?? 'Nothing playing'}</p>
-          <p className="text-xs text-white/50">{isPlaying ? 'Playing' : 'Paused'} · {Math.floor(timestamp)}s</p>
+          <p className="truncate text-sm text-[#e6f1ff]">{currentTrack?.title ?? 'Nothing playing'}</p>
+          <p className="text-xs text-[#8fa7c3]">{isPlaying ? 'Playing' : 'Paused'} · {Math.floor(timestamp)}s</p>
         </div>
 
         <div className="flex items-center gap-2">
-          <button
-            className="rounded-xl border border-white/20 px-3 py-2 text-xs text-white"
-            onClick={() => token && void pause(token)}
-          >
+          <button className="minimal-button-secondary" onClick={() => token && void pause(token)}>
             Pause
           </button>
           <input
@@ -37,18 +34,19 @@ export function PlayerBar() {
             max={500}
             value={Math.min(500, Math.floor(timestamp))}
             onChange={(event) => token && void seek(Number(event.target.value), token)}
-            className="w-28"
+            className="h-1.5 w-full accent-[#7fb8ff] sm:w-44"
           />
         </div>
 
-        <div className="hidden min-w-0 w-64 md:block">
-          <p className="mb-1 text-[11px] uppercase text-white/40">Queue</p>
+        <div className="hidden min-w-0 w-64 sm:block">
+          <p className="mb-1 text-[11px] uppercase text-[#90a6c1]">Queue</p>
           <div className="space-y-1">
             {queuePreview.map((item) => (
-              <p key={item.id} className="truncate text-xs text-white/70">
+              <p key={item.id} className="truncate text-xs text-[#c4dcf8]">
                 {item.title}
               </p>
             ))}
+            {!queuePreview.length && <p className="text-xs text-[#90a6c1]">No queued tracks.</p>}
           </div>
         </div>
       </div>
