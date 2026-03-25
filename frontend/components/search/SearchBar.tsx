@@ -21,7 +21,7 @@ export function SearchBar() {
       value={query}
       onChange={(event) => setQuery(event.target.value)}
       placeholder="Search songs, artists, or mood"
-      className="w-full rounded-2xl border border-white/20 bg-white/5 px-4 py-3 text-white outline-none transition placeholder:text-white/40 focus:border-white/50"
+      className="w-full rounded-xl border border-[#8bb7ff4d] bg-[#eaf3ff12] px-4 py-3 text-[#e7f2ff] outline-none transition placeholder:text-[#a8bbd6] focus:border-[#8bb7ffb3]"
     />
   );
 }

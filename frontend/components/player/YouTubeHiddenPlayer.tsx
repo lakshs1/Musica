@@ -7,7 +7,13 @@ import { usePlayerStore } from '@/store/playerStore';
 
 export function YouTubeHiddenPlayer() {
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const playerRef = useRef<any>(null);
+  type EmbeddedPlayer = {
+  getCurrentTime?: () => number;
+  loadVideoById: (videoId: string, startSeconds?: number) => void;
+  pauseVideo: () => void;
+};
+
+  const playerRef = useRef<EmbeddedPlayer | null>(null);
 
   const currentTrack = usePlayerStore((state) => state.currentTrack);
   const isPlaying = usePlayerStore((state) => state.isPlaying);

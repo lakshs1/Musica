@@ -7,7 +7,6 @@ const required = [
 
 required.forEach((key) => {
   if (!process.env[key]) {
-    // eslint-disable-next-line no-console
     console.warn(`[env] Missing ${key}`);
   }
 });
