@@ -10,6 +10,6 @@ required.forEach((key) => {
 });
 
 export const env = {
-  apiBaseUrl: process.env.NEXT_PUBLIC_API_BASE_URL ?? 'http://localhost:8000/api/v1',
+  apiBaseUrl: process.env.NEXT_PUBLIC_API_BASE_URL ?? 'https://musica-5wdq.onrender.com/api/v1',
   youtubeApiKey: process.env.NEXT_PUBLIC_YOUTUBE_API_KEY ?? ''
 };
