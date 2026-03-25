@@ -1,7 +1,4 @@
-const required = [
-  'NEXT_PUBLIC_API_BASE_URL',
-  'NEXT_PUBLIC_YOUTUBE_API_KEY'
-] as const;
+const required = ['NEXT_PUBLIC_API_BASE_URL'] as const;
 
 required.forEach((key) => {
   if (!process.env[key]) {
@@ -10,6 +7,5 @@ required.forEach((key) => {
 });
 
 export const env = {
-  apiBaseUrl: process.env.NEXT_PUBLIC_API_BASE_URL ?? 'https://musica-5wdq.onrender.com/api/v1',
-  youtubeApiKey: process.env.NEXT_PUBLIC_YOUTUBE_API_KEY ?? ''
+  apiBaseUrl: process.env.NEXT_PUBLIC_API_BASE_URL ?? 'https://musica-5wdq.onrender.com/api/v1'
 };

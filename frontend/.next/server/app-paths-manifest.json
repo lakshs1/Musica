@@ -1,5 +1,6 @@
 {
-  "/playlists/[id]/page": "app/playlists/[id]/page.js",
+  "/manifest.webmanifest/route": "app/manifest.webmanifest/route.js",
+  "/page": "app/page.js",
   "/search/page": "app/search/page.js",
-  "/page": "app/page.js"
+  "/playlists/[id]/page": "app/playlists/[id]/page.js"
 }

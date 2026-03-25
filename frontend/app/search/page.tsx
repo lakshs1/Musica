@@ -1,30 +1,11 @@
-'use client';
+import { Suspense } from 'react';
 
-import { useEffect } from 'react';
-import { useSearchParams } from 'next/navigation';
-
-import { SearchBar } from '@/components/search/SearchBar';
-import { SearchResults } from '@/components/search/SearchResults';
-import { Card } from '@/components/ui/Card';
-import { useSearchStore } from '@/store/searchStore';
+import SearchPageClient from '@/app/search/SearchPageClient';
 
 export default function SearchPage() {
-  const params = useSearchParams();
-  const setQuery = useSearchStore((state) => state.setQuery);
-
-  useEffect(() => {
-    setQuery(params.get('q') ?? '');
-  }, [params, setQuery]);
-
   return (
-    <main className="space-y-4">
-      <h1 className="text-3xl text-[#e7f2ff] sm:text-4xl">Search tracks</h1>
-      <Card>
-        <div className="space-y-4">
-          <SearchBar />
-          <SearchResults />
-        </div>
-      </Card>
-    </main>
+    <Suspense fallback={<main className="py-10 text-center text-sm text-[#9aa7b4]">Loading search...</main>}>
+      <SearchPageClient />
+    </Suspense>
   );
 }
