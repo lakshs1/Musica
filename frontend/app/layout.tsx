@@ -14,21 +14,27 @@ export const metadata: Metadata = {
   description: 'Minimal collaborative YouTube music streaming player',
   manifest: '/manifest.webmanifest',
   icons: {
-    icon: '/icon.svg',
-    shortcut: '/icon.svg',
-    apple: '/icon.svg'
+    icon: [
+      { url: '/icon-192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/icon-512.png', sizes: '512x512', type: 'image/png' }
+    ],
+    shortcut: '/icon-192.png',
+    apple: [
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }
+    ]
   },
   appleWebApp: {
     title: 'Musica',
     capable: true,
-    statusBarStyle: 'black'
+    statusBarStyle: 'black-translucent'
   }
 };
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: '#000000'
+  themeColor: '#000000',
+  viewportFit: 'cover'
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
