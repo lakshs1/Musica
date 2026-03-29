@@ -44,7 +44,11 @@ export function SearchResults({ onPick }: { onPick?: (youtubeId: string) => void
                   thumbnail: track.thumbnail,
                   duration: track.duration
                 },
-                queue
+                queue,
+                {
+                  source,
+                  initiatedBy: 'search_result'
+                }
               );
             }}
           >

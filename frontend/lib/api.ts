@@ -12,6 +12,21 @@ interface RecommendationsResponse {
   source: string;
 }
 
+interface TrackSongPlayedPayload {
+  distinct_id?: string;
+  session_id?: string;
+  session_started_at?: string;
+  session_elapsed_seconds?: number;
+  session_play_count?: number;
+  playlist_id?: number;
+  track_id?: number;
+  youtube_id: string;
+  title: string;
+  duration: string;
+  source?: string;
+  initiated_by?: string;
+}
+
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   const response = await fetch(`${env.apiBaseUrl}${path}`, {
     ...init,
@@ -86,5 +101,10 @@ export const api = {
       method: 'POST',
       headers: { Authorization: `Bearer ${token}` },
       body: JSON.stringify({ timestamp })
+    }),
+  trackSongPlayed: (payload: TrackSongPlayedPayload) =>
+    request<{ status: string }>('/analytics/song-played', {
+      method: 'POST',
+      body: JSON.stringify(payload)
     })
 };

@@ -7,5 +7,7 @@ required.forEach((key) => {
 });
 
 export const env = {
-  apiBaseUrl: process.env.NEXT_PUBLIC_API_BASE_URL ?? 'https://musica-5wdq.onrender.com/api/v1'
+  apiBaseUrl: process.env.NEXT_PUBLIC_API_BASE_URL ?? 'https://musica-5wdq.onrender.com/api/v1',
+  mixpanelToken: process.env.NEXT_PUBLIC_MIXPANEL_TOKEN ?? '',
+  mixpanelDebug: process.env.NEXT_PUBLIC_MIXPANEL_DEBUG === 'true'
 };

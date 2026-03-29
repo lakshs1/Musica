@@ -80,7 +80,15 @@ export function PlayerPanel() {
                   {isPlaying ? 'Pause track' : 'Resume track'}
                 </button>
                 {currentTrack ? (
-                  <button className="minimal-button-secondary" onClick={() => playTrack(currentTrack, queue)}>
+                  <button
+                    className="minimal-button-secondary"
+                    onClick={() =>
+                      playTrack(currentTrack, queue, {
+                        source: 'player_panel',
+                        initiatedBy: 'restart_button'
+                      })
+                    }
+                  >
                     Restart song
                   </button>
                 ) : null}
@@ -102,7 +110,15 @@ export function PlayerPanel() {
                     key={`${item.youtube_id}-${item.title}`}
                     className="flex items-center gap-2 rounded-2xl border border-white/8 bg-white/[0.03] px-4 py-3 transition hover:bg-white/[0.06]"
                   >
-                    <button className="min-w-0 flex-1 text-left" onClick={() => playTrack(item, queue)}>
+                    <button
+                      className="min-w-0 flex-1 text-left"
+                      onClick={() =>
+                        playTrack(item, queue, {
+                          source: 'player_panel_queue',
+                          initiatedBy: 'queue_item'
+                        })
+                      }
+                    >
                       <span className="block truncate text-sm text-[#f5f7fb]">{trimTrackTitle(item.title)}</span>
                       <span className="mt-1 block text-xs text-[#95a1af]">{item.duration}</span>
                     </button>

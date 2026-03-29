@@ -22,6 +22,9 @@ class Settings(BaseSettings):
     youtube_base_url: str = "https://www.googleapis.com/youtube/v3"
     youtube_region_code: str = "IN"
 
+    mixpanel_project_token: str = Field("", alias="MIXPANEL_PROJECT_TOKEN")
+    mixpanel_debug: bool = Field(False, alias="MIXPANEL_DEBUG")
+
     jwt_secret_key: str = Field("", alias="JWT_SECRET_KEY")
     jwt_algorithm: str = "HS256"
 

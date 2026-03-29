@@ -11,6 +11,7 @@ Production-oriented MVP backend for collaborative YouTube-powered music streamin
 - Playback session state in Redis (`session:{playlist_id}`)
 - Redis-backed rate limiting
 - Redis pub/sub notifications for playlist + playback events
+- Mixpanel server-side `song_played` analytics on authenticated playback starts
 
 ## Project Structure
 
@@ -30,6 +31,15 @@ source .venv/bin/activate
 pip install -r requirements.txt
 cp .env.example .env
 uvicorn main:app --reload --port 8000
+```
+
+## Mixpanel env
+
+Add these to `backend/.env`:
+
+```bash
+MIXPANEL_PROJECT_TOKEN=your_mixpanel_project_token
+MIXPANEL_DEBUG=true
 ```
 
 ## API root

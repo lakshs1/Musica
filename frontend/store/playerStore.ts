@@ -2,7 +2,8 @@
 
 import { create } from 'zustand';
 
-import type { PlayableTrack } from '@/types';
+import { trackSongPlayed } from '@/lib/analytics';
+import type { PlayableTrack, PlaybackAnalyticsContext } from '@/types';
 
 interface PlayerState {
   queue: PlayableTrack[];
@@ -13,7 +14,7 @@ interface PlayerState {
   timestamp: number;
   pendingSeek: number | null;
   setQueue: (tracks: PlayableTrack[]) => void;
-  playTrack: (track: PlayableTrack, queue?: PlayableTrack[]) => void;
+  playTrack: (track: PlayableTrack, queue?: PlayableTrack[], analytics?: PlaybackAnalyticsContext) => void;
   addToQueue: (track: PlayableTrack) => void;
   removeFromQueue: (track: PlayableTrack) => void;
   playNext: () => void;
@@ -27,7 +28,7 @@ interface PlayerState {
   setTimestamp: (seconds: number) => void;
 }
 
-export const usePlayerStore = create<PlayerState>((set) => ({
+export const usePlayerStore = create<PlayerState>((set, get) => ({
   queue: [],
   currentTrack: null,
   currentIndex: -1,
@@ -46,7 +47,7 @@ export const usePlayerStore = create<PlayerState>((set) => ({
         currentIndex: nextIndex
       };
     }),
-  playTrack: (track, queue) => {
+  playTrack: (track, queue, analytics) => {
     const nextQueue = queue ?? [track];
     const nextIndex = nextQueue.findIndex((item) => item.youtube_id === track.youtube_id);
 
@@ -58,6 +59,8 @@ export const usePlayerStore = create<PlayerState>((set) => ({
       timestamp: 0,
       pendingSeek: 0
     });
+
+    trackSongPlayed(track, analytics);
   },
   addToQueue: (track) =>
     set((state) => ({
@@ -103,30 +106,46 @@ export const usePlayerStore = create<PlayerState>((set) => ({
         pendingSeek: 0
       };
     }),
-  playNext: () =>
-    set((state) => {
-      if (!state.queue.length) return state;
-      const nextIndex = state.currentIndex >= 0 ? (state.currentIndex + 1) % state.queue.length : 0;
-      return {
-        currentTrack: state.queue[nextIndex],
-        currentIndex: nextIndex,
-        isPlaying: true,
-        timestamp: 0,
-        pendingSeek: 0
-      };
-    }),
-  playPrevious: () =>
-    set((state) => {
-      if (!state.queue.length) return state;
-      const previousIndex = state.currentIndex > 0 ? state.currentIndex - 1 : state.queue.length - 1;
-      return {
-        currentTrack: state.queue[previousIndex],
-        currentIndex: previousIndex,
-        isPlaying: true,
-        timestamp: 0,
-        pendingSeek: 0
-      };
-    }),
+  playNext: () => {
+    const state = get();
+    if (!state.queue.length) return;
+
+    const nextIndex = state.currentIndex >= 0 ? (state.currentIndex + 1) % state.queue.length : 0;
+    const nextTrack = state.queue[nextIndex];
+
+    set({
+      currentTrack: nextTrack,
+      currentIndex: nextIndex,
+      isPlaying: true,
+      timestamp: 0,
+      pendingSeek: 0
+    });
+
+    trackSongPlayed(nextTrack, {
+      source: 'player_queue',
+      initiatedBy: 'next_button'
+    });
+  },
+  playPrevious: () => {
+    const state = get();
+    if (!state.queue.length) return;
+
+    const previousIndex = state.currentIndex > 0 ? state.currentIndex - 1 : state.queue.length - 1;
+    const previousTrack = state.queue[previousIndex];
+
+    set({
+      currentTrack: previousTrack,
+      currentIndex: previousIndex,
+      isPlaying: true,
+      timestamp: 0,
+      pendingSeek: 0
+    });
+
+    trackSongPlayed(previousTrack, {
+      source: 'player_queue',
+      initiatedBy: 'previous_button'
+    });
+  },
   pause: () => set({ isPlaying: false }),
   resume: () => set({ isPlaying: true }),
   seek: (seconds) => set({ timestamp: seconds, pendingSeek: seconds }),

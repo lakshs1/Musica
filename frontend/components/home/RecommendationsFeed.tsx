@@ -155,7 +155,11 @@ export function RecommendationsFeed() {
                         thumbnail: item.thumbnail,
                         duration: item.duration
                       },
-                      queue
+                      queue,
+                      {
+                        source: state.source,
+                        initiatedBy: 'recommendation_card'
+                      }
                     )
                   }
                   className="flex aspect-[0.92/1] w-full flex-col justify-between p-4 text-left"
@@ -190,7 +194,11 @@ export function RecommendationsFeed() {
                           thumbnail: item.thumbnail,
                           duration: item.duration
                         },
-                        queue
+                        queue,
+                        {
+                          source: state.source,
+                          initiatedBy: 'recommendation_button'
+                        }
                       )
                     }
                   >

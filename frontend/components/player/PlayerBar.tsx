@@ -67,7 +67,16 @@ export function PlayerBar() {
             <p className="mb-1 text-[11px] uppercase text-[#90a6c1]">Queue</p>
             <div className="space-y-1">
               {queuePreview.map((item) => (
-                <button key={item.youtube_id} className="block truncate text-left text-xs text-[#c4dcf8]" onClick={() => playTrack(item, queue)}>
+                <button
+                  key={item.youtube_id}
+                  className="block truncate text-left text-xs text-[#c4dcf8]"
+                  onClick={() =>
+                    playTrack(item, queue, {
+                      source: 'player_bar_queue',
+                      initiatedBy: 'queue_preview'
+                    })
+                  }
+                >
                   {trimTrackTitle(item.title)}
                 </button>
               ))}

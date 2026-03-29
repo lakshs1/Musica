@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import Link from 'next/link';
 
 import { AppLogo } from '@/components/AppLogo';
+import { MixpanelProvider } from '@/components/analytics/MixpanelProvider';
 import { PlayerBar } from '@/components/player/PlayerBar';
 import { PlayerPanel } from '@/components/player/PlayerPanel';
 import { PwaRegister } from '@/components/PwaRegister';
@@ -41,6 +42,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body>
+        <MixpanelProvider />
         <PwaRegister />
         <YouTubeHiddenPlayer />
         <PlayerPanel />

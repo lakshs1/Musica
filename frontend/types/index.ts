@@ -5,6 +5,13 @@ export interface PlayableTrack {
   duration: string;
 }
 
+export interface PlaybackAnalyticsContext {
+  source?: string;
+  playlistId?: number;
+  trackId?: number;
+  initiatedBy?: string;
+}
+
 export interface Track extends PlayableTrack {
   id: number;
 }

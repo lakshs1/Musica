@@ -1,3 +1,3 @@
-from routers import search
+from routers import analytics, auth, playback, playlists, search, tracks
 
-__all__ = ["search"]
+__all__ = ["analytics", "auth", "playback", "playlists", "search", "tracks"]
