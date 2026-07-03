@@ -1,4 +1,4 @@
-# Musica
+ Musica
 
 Collaborative music streaming platform powered by YouTube playback.
 
