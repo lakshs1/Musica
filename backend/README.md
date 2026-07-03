@@ -33,7 +33,7 @@ cp .env.example .env
 uvicorn main:app --reload --port 8000
 ```
 
-## Mixpanel env
+# Mixpanel env
 
 Add these to `backend/.env`:
 
