@@ -6,7 +6,7 @@ import '../models/track.dart';
 class ApiService {
   // Set this to your deployed Render backend host (e.g., "musync-backend.onrender.com").
   // Leave empty to automatically resolve to localhost for local testing.
-  static const String deployedBackendHost = "";
+  static const String deployedBackendHost = "musync-8deh.onrender.com";
 
   static String get baseHttpUrl {
     if (deployedBackendHost.isNotEmpty) {
