@@ -136,14 +136,32 @@ class _PlayerScreenState extends State<PlayerScreen> {
             );
           },
         ),
-        title: Text(
-          "Musync",
-          style: GoogleFonts.outfit(
-            fontSize: 22,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-            letterSpacing: 1.0,
-          ),
+        title: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              width: 28,
+              height: 28,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(6),
+              ),
+              clipBehavior: Clip.antiAlias,
+              child: Image.asset(
+                'assets/logo.png',
+                fit: BoxFit.cover,
+              ),
+            ),
+            const SizedBox(width: 8),
+            Text(
+              "Musync",
+              style: GoogleFonts.outfit(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+                letterSpacing: 1.0,
+              ),
+            ),
+          ],
         ),
         centerTitle: true,
         actions: [

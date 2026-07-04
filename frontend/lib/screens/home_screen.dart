@@ -148,10 +148,24 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: [
                         // App Logo/Name
                         Center(
-                          child: Icon(
-                            Icons.sync_rounded,
-                            size: 48,
-                            color: const Color(0xFF6366F1),
+                          child: Container(
+                            width: 80,
+                            height: 80,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: const Color(0xFF6366F1).withOpacity(0.25),
+                                  blurRadius: 20,
+                                  spreadRadius: 2,
+                                ),
+                              ],
+                            ),
+                            clipBehavior: Clip.antiAlias,
+                            child: Image.asset(
+                              'assets/logo.png',
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
                         const SizedBox(height: 16),
