@@ -1,12 +1,13 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:js' as js;
-import 'package:flutter/foundation.dart' show kIsWeb;
+
 import 'package:flutter/material.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 import '../models/track.dart';
 import '../services/api_service.dart';
+import '../services/media_session_stub.dart'
+    if (dart.library.js) '../services/media_session_web.dart' as ms;
 
 enum ConnectionStateEnum { disconnected, connecting, connected }
 
@@ -224,40 +225,7 @@ class RoomProvider extends ChangeNotifier {
   }
 
   void _updateMediaSession() {
-    if (!kIsWeb) return;
-    try {
-      final nav = js.context['navigator'];
-      if (nav == null) return;
-      final mediaSession = nav['mediaSession'];
-      if (mediaSession != null) {
-        if (_activeTrack != null) {
-          final metadata = js.JsObject(js.context['MediaMetadata'], [
-            js.JsObject.jsify({
-              'title': _activeTrack!.title,
-              'artist': 'Musync Room: $_roomCode',
-              'album': 'Musync App',
-              'artwork': [
-                {'src': _activeTrack!.thumbnail, 'sizes': '512x512', 'type': 'image/jpeg'}
-              ]
-            })
-          ]);
-          mediaSession['metadata'] = metadata;
-        } else {
-          mediaSession['metadata'] = null;
-        }
-
-        mediaSession['playbackState'] = _isPlaying ? 'playing' : 'paused';
-
-        mediaSession.callMethod('setActionHandler', ['play', () {
-          setPlayState(true);
-        }]);
-        mediaSession.callMethod('setActionHandler', ['pause', () {
-          setPlayState(false);
-        }]);
-      }
-    } catch (e) {
-      debugPrint("MediaSession error: $e");
-    }
+    ms.updateMediaSession(_activeTrack, _roomCode, _isPlaying, setPlayState);
   }
 
   // Client triggers (send commands to WebSocket)
